@@ -1,0 +1,28 @@
+<h1>User Profile: <%= @view_user[:name] %></h1>
+<% if current_user %>
+	<form action='/sessions' method='post'>
+		<p>
+			Currently logged in as <%= current_user[:name] %>.
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Log out'>
+		</p>
+	</form>
+<% else %>
+<table>
+	<tr>
+		<td>User ID:</td>
+		<td><%= @view_user[:id] %></td>
+	</tr>
+	<tr>
+		<td>Name:</td>
+		<td><%= @view_user[:name] %></td>
+	</tr>
+	<% if current_user %>
+		<tr>
+			<td>Email:</td>
+			<td><%= @view_user[:email] %></td>
+		</tr>
+	<% end %>
+</table>
+<a href="/">Back to Index</a>

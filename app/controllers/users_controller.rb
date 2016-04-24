@@ -13,6 +13,10 @@ class UsersController < ApplicationController
 	  	end
 	end
 
+	def show
+		@view_user = User.find(params[:id])
+	end
+
 	def create
 	  	@user = User.create( register_params )
 	  	if @user.errors.full_messages.length > 0
