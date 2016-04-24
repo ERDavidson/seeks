@@ -1,0 +1,38 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+*{
+	background-color: rgb(28,28,28);
+	font-family: sans-serif;
+	color: rgb(180,180,180);
+	margin: 2px;
+}
+
+.red{
+	color: #9b1b1b;
+}
+
+h1{
+	font-size: 1.5rem;
+	margin-bottom: 15px;
+}
+
+table{
+	border-width: 3px;
+	border-style: outset;
+	border-color: rgb(180,180,180);
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 4px;
+}
+
+td{
+	border-width: 1px;
+	border-style:inset;
+	border-color: rgb(60,60,60);
+}
+
+form{
+	display: inline-block;
+	vertical-align: top;
+}

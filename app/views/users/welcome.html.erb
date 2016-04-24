@@ -1,0 +1,61 @@
+<h1>Seeks login page</h1>
+<% if flash[:errors] %>
+	<p class='red'><%= flash[:errors] %></p>
+<% end %>
+<% if flash[:action_status] %>
+	<p class='red'><%= flash[:action_status] %></p>
+<% end %>
+<form action='/login' method='post'>
+	<p>Current users: Log in</p>
+	<table>
+		<tr>
+			<td>Email:</td>
+			<td><input type='text' name="user[email]"></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type='password' name="user[password]"></td>
+		</tr>
+	</table>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+	<input type='submit' value='Log in'>
+</form>
+<form action='/register' method='post'>
+	<p>New users: Register here!</p>
+	<table>
+		<tr>
+			<td>Name:</td>
+			<td><input type='text' name="user[name]"></td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><input type='text' name="user[email]"></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type='password' name="user[password]"></td>
+		</tr>
+		<tr>
+			<td>Confirm Password:</td>
+			<td><input type='password' name="user[password_confirmation]"></td>
+		</tr>
+	</table>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+	<input type='submit' value='Register'>
+</form>
+<form action='/sneak' method='post'>
+	<p>Or sneak a peek at Index to verify absence of logout button.</p>
+	<table>
+		<tr>
+			<td>Email:</td>
+			<td><input type='text' value='None' readonly></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type='text' value='None' readonly></td>
+		</tr>
+	</table>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+		<input type='submit' value='Sneak'>
+
+</form>

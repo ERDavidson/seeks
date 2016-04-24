@@ -1,0 +1,39 @@
+<h1>Seeks user page</h1>
+<% if flash[:errors] %>
+	<h3><%= flash[:errors] %></h3>
+<% end %>
+<% if flash[:action_status] %>
+	<h3><%= flash[:action_status] %></h3>
+<% end %>
+<% if current_user %>
+	<form action='/sessions' method='post'>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+		<input type='hidden' name='_method' value='delete'>
+		<input type='submit' value='Log out'>
+	</form>
+<% end %>
+<% if @user_list %>
+	<table>
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Email</td>
+			<td>Digest</td>
+		</tr>
+		<% @user_list.each do |entry| %>
+			<tr>
+				<td><%= entry[:id] %></td>
+				<td><%= entry[:name] %></td>
+				<td><%= entry[:email] %></td>
+				<td><%= entry[:password_digest] %></td>
+				<td>
+					<form action="/users/<%= entry[:id] %>" method='post'>
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+						<input type='hidden' name='_method' value='delete'>
+						<input type='submit' value='Delete'>
+					</form>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+<% end %>
