@@ -1,36 +1,42 @@
 <h1>Seeks User Index</h1>
-<% if flash[:errors] %>
-	<h3><%= flash[:errors] %></h3>
-<% end %>
-<% if flash[:action_status] %>
-	<h3><%= flash[:action_status] %></h3>
-<% end %>
-<% if current_user %>
-	<form action='/sessions' method='post'>
-		<p>
-			Currently logged in as <%= current_user[:name] %>.
-			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-			<input type='hidden' name='_method' value='delete'>
-			<input type='submit' value='Log out'>
-		</p>
-	</form>
-<% else %>
-	<form action='/sessions/create' method='post'>
-		<p>Current users: Log in</p>
-		<table>
-			<tr>
-				<td>Email:</td>
-				<td><input type='text' name="user[email]"></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name="user[password]"></td>
-			</tr>
-		</table>
-		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-		<input type='submit' value='Log in'>
+<div class='flash'>
+	<% if flash[:errors] %>
+		<div class='red flash_box'>
+			<p><%= flash[:errors] %></p>
+		</div>
+	<% end %>
+	<% if flash[:action_status] %>
+		<p class='green flash_box'><%= flash[:action_status] %></p>
+	<% end %>
+</div>
+<div class='login_status'>
+	<% if current_user %>
+		<form action='/sessions' method='post'>
+			<p>
+				Currently logged in as <%= current_user[:name] %>.
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+				<input type='hidden' name='_method' value='delete'>
+				<input type='submit' value='Log out'>
+			</p>
 		</form>
-<% end %>
+	<% else %>
+		<form action='/sessions/create' method='post'>
+			<p>Current users: Log in</p>
+			<table>
+				<tr>
+					<td>Email:</td>
+					<td><input type='text' name="user[email]"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type='password' name="user[password]"></td>
+				</tr>
+			</table>
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+			<input type='submit' value='Log in'>
+		</form>
+	<% end %>
+</div>
 <% if @user_list %>
 	<table>
 		<tr>

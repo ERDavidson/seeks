@@ -1,10 +1,16 @@
 <h1>New User Registration</h1>
-<% if flash[:errors] %>
-	<p class='red'><%= flash[:errors] %></p>
-<% end %>
-<% if flash[:action_status] %>
-	<p class='red'><%= flash[:action_status] %></p>
-<% end %>
+<div class='flash'>
+	<% if flash[:errors] %>
+		<div class='red flash_box'>
+			<% for message in flash[:errors] %>
+				<p><%= message %></p>
+			<% end %>
+		</div>
+	<% end %>
+	<% if flash[:action_status] %>
+		<p class='green flash_box'><%= flash[:action_status] %></p>
+	<% end %>
+</div>
 <form action='/users/create' method='post'>
 	<table>
 		<tr>
@@ -27,3 +33,6 @@
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
 	<input type='submit' value='Register'>
 </form>
+<div class='footer'>
+	<a href="/">View Index</a>
+</div>

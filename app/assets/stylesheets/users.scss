@@ -9,7 +9,18 @@
 }
 
 .red{
-	color: #9b1b1b;
+	border-color: rgb(75,15,15);
+}
+
+.green{
+	border-color: rgb(15,75,15);
+}
+
+.flash_box{
+	display: inline-block;
+	border-style: groove;
+	border-width: 4px;
+	padding: 4px;
 }
 
 h1{
@@ -18,9 +29,9 @@ h1{
 }
 
 table{
-	border-width: 3px;
-	border-style: outset;
-	border-color: rgb(180,180,180);
+	border-width: 4px;
+	border-style: groove;
+	border-color: rgb(150,150,150);
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 4px;
@@ -35,4 +46,9 @@ td{
 form{
 	display: inline-block;
 	vertical-align: top;
+}
+
+.footer{
+	font-size: 0.9rem;
+	margin-top: 12px;
 }
