@@ -36,11 +36,12 @@ class UsersController < ApplicationController
 			updated_user.email = update_params[:email]
 			if updated_user.valid? == false
 				flash[:errors] = updated_user.errors.full_messages
+				redirect_to "/users/#{current_user[:id]}/edit"
 			else
 				updated_user.save
+				redirect_to "/users/#{current_user[:id]}"
 		 	end
 		end
-		redirect_to "/users/#{current_user[:id]}/edit"
 	end
 
 	def create
@@ -69,7 +70,8 @@ class UsersController < ApplicationController
 
   def destroy
   	destroyed_user = User.find(params[:id]).destroy
-  	flash[:action_status] = "Removed #{destroyed_user[:name]} from database."
+  	reset_session
+  	flash[:action_status] = "Your account has been deleted."
   	redirect_to "/"
   end
 

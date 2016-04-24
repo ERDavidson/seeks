@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   delete '/sessions' => 'users#logout'
 
+  get '/logout' => 'users#logout'
+ 
 
 
 
