@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   post '/users/create' => 'users#create'
 
+  get '/users/:id/edit' => 'users#edit'
+
   get '/users/:id' => 'users#show'
 
   delete '/users/:id' => 'users#destroy'

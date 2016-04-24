@@ -17,6 +17,15 @@ class UsersController < ApplicationController
 		@view_user = User.find(params[:id])
 	end
 
+	def edit
+		if session[:user]
+			if session[:user].to_i != params[:id].to_i
+				flash[:errors] = "You may only edit your own profile."
+				redirect_to "/users/#{params[:id]}"
+			end
+		end
+	end
+
 	def create
 	  	@user = User.create( register_params )
 	  	if @user.errors.full_messages.length > 0
