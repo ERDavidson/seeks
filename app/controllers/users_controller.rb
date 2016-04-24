@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 	  	else
 	  		flash[:action_status] = "Registration successful!"
 	  		session[:user] = @user['id']
-	  		redirect_to "/"
+	  		redirect_to "/users/#{@user['id']}"
 	  	end
 	end
 
@@ -33,11 +33,12 @@ class UsersController < ApplicationController
 		@user = User.find_by(email: params[:user][:email].downcase).try(:authenticate, params[:user]['password'])
 		if !@user
 			flash[:errors] = "Login failed.  Please try again"
+			redirect_to "/"
 		else
 			flash[:action_status] = "Login successful!"
 			session[:user] = @user['id']
+			redirect_to "/users/#{@user['id']}"
 		end
-		redirect_to "/"
 	end
 
   def destroy
