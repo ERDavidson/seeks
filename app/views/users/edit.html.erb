@@ -2,7 +2,9 @@
 <div class='flash'>
 	<% if flash[:errors] %>
 		<div class='red flash_box'>
-			<p><%= flash[:errors] %></p>
+			<% for message in flash[:errors] %>
+				<p><%= message %></p>
+			<% end %>
 		</div>
 	<% end %>
 	<% if flash[:action_status] %>
@@ -21,21 +23,29 @@
 		</form>
 	<% end %>
 </div>
-<table>
-	<tr>
-		<td>User ID:</td>
-		<td><%= current_user[:id] %></td>
-	</tr>
-	<tr>
-		<td>Name:</td>
-		<td><input type='text' name="user[name]" value="<%= current_user[:name] %>"></td>
-	</tr>
-	<tr>
-		<td>Email:</td>
-		<td><input type='text' name="user[email]" value="<%= current_user[:email] %>"></td>
-	</tr>
-</table>
-<input type='submit' value='Update Profile'>
+<form action="/users/<%= current_user[:id] %>" method='post'>
+	<table>
+		<tr>
+			<td>User ID:</td>
+			<td><%= current_user[:id] %></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type='text' name="user[name]" value="<%= current_user[:name] %>"></td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><input type='text' name="user[email]" value="<%= current_user[:email] %>"></td>
+		</tr>
+		<tr>
+			<td>Digest:</td>
+			<td><%= current_user[:password_digest] %></td>
+		</tr>
+	</table>
+	<input type='hidden' name="_method" value="patch">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+	<input type='submit' value='Update Profile'>
+</form>
 <div class='footer'>
 	<a href="/">User Index</a> | <a href="/users/<%= current_user[:id] %>">Show Profile</a>
 </div>

@@ -23,7 +23,24 @@ class UsersController < ApplicationController
 				flash[:errors] = "You may only edit your own profile."
 				redirect_to "/users/#{params[:id]}"
 			end
+		else
+			flash[:errors] = "Please log in first."
+			redirect_to "/"
 		end
+	end
+
+	def update
+		updated_user = User.find(session[:user])
+		updated_user.with_lock do 
+			updated_user.name = update_params[:name]
+			updated_user.email = update_params[:email]
+			if updated_user.valid? == false
+				flash[:errors] = updated_user.errors.full_messages
+			else
+				updated_user.save
+		 	end
+		end
+		redirect_to "/users/#{current_user[:id]}/edit"
 	end
 
 	def create
@@ -65,6 +82,10 @@ class UsersController < ApplicationController
   private
   	def register_params
 	  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  	end
+
+  	def update_params
+  		params.require(:user).permit(:name, :email)
   	end
 
 end
