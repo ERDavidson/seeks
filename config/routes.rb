@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get '/secrets' => 'secrets#index'
 
   post 'likes/create' => 'likes#create'
+
+  delete '/likes/:id' => 'likes#destroy'
  
 
 

@@ -1,6 +1,6 @@
 class SecretsController < ApplicationController
 	def index
-		@trimmed_secrets = Secret.prepare_secrets()
+		@trimmed_secrets = Secret.prepare_secrets(current_user)
 	end
 
 	def create

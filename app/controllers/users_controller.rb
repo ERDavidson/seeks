@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
 	def show
 		@view_user = User.find(params[:id])
-		@secret_list = Secret.prepare_secrets(@view_user)
+		@secret_list = Secret.prepare_secrets(current_user,@view_user)
 	end
 
 	def edit
