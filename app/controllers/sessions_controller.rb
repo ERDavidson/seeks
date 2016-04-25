@@ -1,19 +1,22 @@
 class SessionsController < ApplicationController
+def new
+end
+
 def login
-	@user = User.find_by(email: params[:user][:email].downcase).try(:authenticate, params[:user]['password'])
-	if !@user
+	logging_user = User.find_by(email: params[:user][:email].downcase).try(:authenticate, params[:user]['password'])
+	if !logging_user
 		flash[:errors] = "Login failed.  Please try again"
-		redirect_to "/"
+		redirect_to "/sessions/new"
 	else
 		flash[:action_status] = "Login successful!"
-		session[:user] = @user['id']
-		redirect_to "/users/#{@user['id']}"
+		session[:user] = logging_user['id']
+		redirect_to "/users/#{logging_user['id']}"
 	end
 end
 
   def logout
   	reset_session
   	flash[:action_status] = "You have been logged out."
-  	redirect_to "/"
+  	redirect_to "/sessions/new"
   end
 end

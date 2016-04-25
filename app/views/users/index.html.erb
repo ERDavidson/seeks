@@ -9,59 +9,38 @@
 		<p class='green flash_box'><%= flash[:action_status] %></p>
 	<% end %>
 </div>
-<div class='login_status'>
-	<% if current_user %>
-		<form action='/sessions' method='post'>
-			<p>
-				Currently logged in as <%= current_user[:name] %>.
-				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-				<input type='hidden' name='_method' value='delete'>
-				<input type='submit' value='Log out'>
-			</p>
-		</form>
-	<% else %>
-		<form action='/sessions/create' method='post'>
-			<p>Current users: Log in</p>
-			<table>
-				<tr>
-					<td>Email:</td>
-					<td><input type='text' name="user[email]"></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name="user[password]"></td>
-				</tr>
-			</table>
-			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-			<input type='submit' value='Log in'>
-		</form>
-	<% end %>
-</div>
-<% if @user_list %>
-	<table>
+<table>
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+	</tr>
+	<% @user_list.each do |entry| %>
 		<tr>
-			<td>ID</td>
-			<td>Name</td>
+			<td><%= entry[:id] %></td>
+			<td><%= entry[:name] %></td>
+			<td>
+				<form action="/users/<%= entry[:id] %>" method='get'>
+					<input type='submit' value='View Profile'>
+				</form>
+				<!--<form action="/users/<%= entry[:id] %>" method='post'>
+					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+					<input type='hidden' name='_method' value='delete'>
+					<input type='submit' value='Delete'>
+				</form>-->
+			</td>
 		</tr>
-		<% @user_list.each do |entry| %>
-			<tr>
-				<td><%= entry[:id] %></td>
-				<td><%= entry[:name] %></td>
-				<td>
-					<form action="/users/<%= entry[:id] %>" method='get'>
-						<input type='submit' value='View Profile'>
-					</form>
-					<form action="/users/<%= entry[:id] %>" method='post'>
-						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-						<input type='hidden' name='_method' value='delete'>
-						<input type='submit' value='Delete'>
-					</form>
-				</td>
-			</tr>
-		<% end %>
-	</table>
-	<div class='footer'>
+	<% end %>
+</table>
+<div class='footer'>
+	<p>
 		<a href="/secrets">View Secrets</a> | <a href="/users/<%= current_user[:id] %>">My Profile</a>
-<% else %>
-	<p>Not a member?  <a href="/users/new">Register here!</a></p>
-<% end %>
+	</p>
+	<p class='login_status'>
+		<form action='/sessions' method='post'>
+			Currently logged in as <%= current_user[:name] %>.
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Log out'>
+		</form>
+	</p>
+</div>

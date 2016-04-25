@@ -15,8 +15,8 @@ class Secret < ActiveRecord::Base
 			entry.likes.count > 0 ? likes = entry.likes.count : likes = 0
 			puts entry.inspect
 			current_user.secrets_liked.include? entry ? my_opinion = Like.where(user:current_user,secret:entry).pluck(:id)[0] : my_opinion = false
-			puts my_opinion
-			trimmed_secrets.push({:id=>entry[:id],:content=>entry[:content],:likes=>likes,:my_opinion=>my_opinion})
+			entry.user == current_user ?  mine = true : mine = false
+			trimmed_secrets.push({:id=>entry[:id],:content=>entry[:content],:likes=>likes,:mine=>mine,:my_opinion=>my_opinion})
 			puts trimmed_secrets.to_s
 		end
 		trimmed_secrets

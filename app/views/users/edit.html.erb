@@ -38,21 +38,17 @@
 	<p>
 		<a href="/">View Users</a> | <a href="/secrets">View Secrets</a> | <a href="/users/<%= current_user[:id] %>">My Profile</a>
 	</p>
-	<div class='login_status'>
-		<% if current_user %>
-			<p>
-				<form action='/sessions' method='post'>
-					Currently logged in as <%= current_user[:name] %>.
-					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-					<input type='hidden' name='_method' value='delete'>
-					<input type='submit' value='Log out'>
-				</form>
-				<form action="/users/<%= current_user[:id] %>" method='post'>
-					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-					<input type='hidden' name='_method' value='delete'>
-					<input type='submit' value='Delete Account'>
-				</form>
-			</p>
-		<% end %>
-	</div>
+	<p class='login_status'>
+		<form action='/sessions' method='post'>
+			Currently logged in as <%= current_user[:name] %>.
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Log out'>
+		</form>
+		<form action="/users/<%= current_user[:id] %>" method='post'>
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Delete Account'>
+		</form>
+	</p>
 </div>

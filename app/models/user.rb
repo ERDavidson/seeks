@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
 	validates :password, confirmation: true, :on => :create
 	validates :password_confirmation, presence: true, :on => :create
 
+	def mine(this_user, this_secret)
+		User.find(this_user[:id]).secrets.pluck(:id).include? this_secret[:id]
+	end
+
 end

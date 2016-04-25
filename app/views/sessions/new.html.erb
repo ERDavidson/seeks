@@ -1,22 +1,17 @@
-<h1>New User Registration</h1>
+<h1>Welcome to Seeks!</h1>
 <div class='flash'>
 	<% if flash[:errors] %>
 		<div class='red flash_box'>
-			<% for message in flash[:errors] %>
-				<p><%= message %></p>
-			<% end %>
+			<p><%= flash[:errors] %></p>
 		</div>
 	<% end %>
 	<% if flash[:action_status] %>
 		<p class='green flash_box'><%= flash[:action_status] %></p>
 	<% end %>
 </div>
-<form action='/users/create' method='post'>
+<form action='/sessions/create' method='post'>
+	<p>Current users: Log in</p>
 	<table>
-		<tr>
-			<td>Name:</td>
-			<td><input type='text' name="user[name]"></td>
-		</tr>
 		<tr>
 			<td>Email:</td>
 			<td><input type='text' name="user[email]"></td>
@@ -25,11 +20,8 @@
 			<td>Password:</td>
 			<td><input type='password' name="user[password]"></td>
 		</tr>
-		<tr>
-			<td>Confirm Password:</td>
-			<td><input type='password' name="user[password_confirmation]"></td>
-		</tr>
 	</table>
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-	<input type='submit' value='Register'>
+	<input type='submit' value='Log in'>
 </form>
+<p>Not a member?  <a href='/users/new'>Register here!</a></p>
