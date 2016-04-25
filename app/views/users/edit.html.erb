@@ -35,9 +35,7 @@
 	<input type='submit' value='Update Profile'>
 </form>
 <div class='footer'>
-	<p>
-		<a href="/">View Users</a> | <a href="/secrets">View Secrets</a> | <a href="/users/<%= current_user[:id] %>">My Profile</a>
-	</p>
+	<p><a href="/secrets">View Secrets</a> | <a href="/users/<%= current_user[:id] %>">My Profile</a></p>
 	<p class='login_status'>
 		<form action='/sessions' method='post'>
 			Currently logged in as <%= current_user[:name] %>.

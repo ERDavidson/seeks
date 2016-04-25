@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 def new
+	if current_user
+		redirect_to "/users/#{current_user[:id]}"
+	end
 end
 
 def login
@@ -10,7 +13,7 @@ def login
 	else
 		flash[:action_status] = "Login successful!"
 		session[:user] = logging_user['id']
-		redirect_to "/users/#{logging_user['id']}"
+		redirect_to "/users/#{logging_user[:id]}"
 	end
 end
 

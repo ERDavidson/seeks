@@ -34,33 +34,24 @@
 				<%= this_secret[:content] %>
 			</td>
 			<td><%= this_secret[:likes] %></td>
-			<% if current_user == @view_user %>
-				<td>		
-					<form action="/secrets/<%= this_secret[:id] %>" method='post'>
-						<input type='hidden' name='_method' value='delete'>
-						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-						<input type='submit' value='Delete Secret'>
-					</form>
-				</td>
-			<% end %>
+			<td>		
+				<form action="/secrets/<%= this_secret[:id] %>" method='post'>
+					<input type='hidden' name='_method' value='delete'>
+					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+					<input type='submit' value='Delete Secret'>
+				</form>
+			</td>
 		</tr>
 	<% end %>
 </table>
-<% if current_user[:id] == @view_user[:id] %>
-	<p>Tell me everything!</p>
-	<form action='/secrets/create' method='post'>
-		<textarea class="new_secret" name="secret_content"></textarea>
-		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
-		<input type='submit' value='Share Secret'>
-	</form>
-<% end %>
+<p>Tell me everything!</p>
+<form action='/secrets/create' method='post'>
+	<textarea class="new_secret" name="secret_content"></textarea>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+	<input type='submit' value='Share Secret'>
+</form>
 <div class='footer'>
-	<p>
-		<a href="/">View Users</a> | <a href="/secrets">View Secrets</a>
-		<% if current_user[:id] == @view_user[:id] %>
-			 | <a href="/users/<%= current_user[:id] %>/edit">Edit Profile</a>
-		<% end %>
-	</p>
+	<p><a href="/secrets">View Secrets</a> | <a href="/users/<%= current_user[:id] %>/edit">Edit Profile</a></p>
 	<p class='login_status'>
 		<form action='/sessions' method='post'>
 			Currently logged in as <%= current_user[:name] %>.

@@ -13,13 +13,18 @@ class SecretsController < ApplicationController
 		else
 			flash[:errors] = new_secret.errors.full_messsages
 		end
-		redirect_to "/users/#{session[:user]}"
+		redirect_to "/users/#{current_user[:id]}"
 	end
 
 	def destroy
-		deleted_secret = Secret.find(params[:id]).destroy
-		flash[:action_status] = "Secret returned to secrecy."
-		redirect_to "/users/#{session[:user]}"
+		deleted_secret = Secret.find(params[:id])
+		if deleted_secret.user == current_user
+			deleted_secret.destroy
+			flash[:action_status] = "Secret returned to secrecy."
+		else
+			flash[:errors] = "You may only tamper with your own secrets."
+		end
+		redirect_to "/users/#{current_user[:id]}"
 	end
 
 	

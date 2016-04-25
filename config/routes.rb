@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'users#index'
+  root 'sessions#new'
 
   get '/users/new' => 'users#new'
 
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   delete '/users/:id' => 'users#destroy'
 
-  get '/users' => 'users#index'
+  get '/users' => 'sessions#new'
 
   get '/sessions/new' => 'sessions#new'
   

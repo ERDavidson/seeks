@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :require_login, except: [:new, :create]
+	before_action :require_correct_user, only: [:show, :edit, :update, :destroy]
 	
 	def index
   		@user_list = User.all
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
 	  	else
 	  		flash[:action_status] = "Registration successful!"
 	  		session[:user] = registering_user['id']
-	  		redirect_to "/users/#{registering_user['id']}"
+	  		redirect_to "/users/#{registering_user[:id]}"
 	  	end
 	end
 
@@ -26,10 +27,6 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		if session[:user].to_i != params[:id].to_i
-			flash[:errors] = "You may only edit your own profile."
-			redirect_to "/users/#{params[:id]}"
-		end
 	end
 
 	def update

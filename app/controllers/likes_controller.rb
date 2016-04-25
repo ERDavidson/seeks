@@ -15,6 +15,6 @@ class LikesController < ApplicationController
 	def destroy
 		dislike = Like.find(params[:id]).destroy
 		flash[:action_status] = "Secret disliked."
-		redirect_to "/users/#{session[:user]}"
+		redirect_to "/users/#{current_user[:id]}"
 	end
 end

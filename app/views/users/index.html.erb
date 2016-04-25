@@ -1,3 +1,4 @@
+<!-- Currently obsolete but could be useful if ever wanted to add admin privileges.
 <h1>Seeks User Index</h1>
 <div class='flash'>
 	<% if flash[:errors] %>
@@ -22,11 +23,11 @@
 				<form action="/users/<%= entry[:id] %>" method='get'>
 					<input type='submit' value='View Profile'>
 				</form>
-				<!--<form action="/users/<%= entry[:id] %>" method='post'>
+				<form action="/users/<%= entry[:id] %>" method='post'>
 					<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
 					<input type='hidden' name='_method' value='delete'>
 					<input type='submit' value='Delete'>
-				</form>-->
+				</form>
 			</td>
 		</tr>
 	<% end %>
@@ -43,4 +44,4 @@
 			<input type='submit' value='Log out'>
 		</form>
 	</p>
-</div>
+</div>-->
