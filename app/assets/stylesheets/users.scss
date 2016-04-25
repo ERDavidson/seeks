@@ -56,3 +56,18 @@ form{
 .login_status{
 	margin-top: 12px;
 }
+
+textarea{
+	height: 90px;
+	width: 270px;
+	overflow-y: scroll;
+	overflow-x: wrap;
+}
+
+.new_secret{
+	vertical-align: middle;
+}
+
+.secret_list{
+	font-size: 0.9rem;
+}
