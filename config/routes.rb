@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   root 'users#index'
 
   get '/users/new' => 'users#new'
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
 
   get '/secrets' => 'secrets#index'
 
-
+  post 'likes/create' => 'likes#create'
  
 
 

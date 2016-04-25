@@ -13,7 +13,8 @@ class Secret < ActiveRecord::Base
 		trimmed_secrets = []
 		raw_secrets.each do |entry|
 			entry.likes.count > 0 ? likes = entry.likes.count : likes = 0
-			trimmed_secrets.push({:id=>entry[:id],:content=>entry[:content],:likes=>likes})
+			likers = entry.users_liked_by.pluck(:id)
+			trimmed_secrets.push({:id=>entry[:id],:content=>entry[:content],:likes=>likes,:likers=>likers})
 		end
 		trimmed_secrets
 	end
