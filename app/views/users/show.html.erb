@@ -18,18 +18,29 @@
 		<td>Name:</td>
 		<td><%= @view_user[:name] %></td>
 	</tr>
-	<% if current_user %>
+	<tr>
+		<td>Email:</td>
+		<td><%= @view_user[:email] %></td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<td>Secrets</td>
+	</tr>
+	<% @secret_list.each do |this_secret| %>
 		<tr>
-			<td>Email:</td>
-			<td><%= @view_user[:email] %></td>
-		</tr>
-		<tr>
-			<td>Secrets:</td>
 			<td class='secret_list'>
-				<% @secret_list.each do |this_secret| %>
-					<p><%= this_secret[:content] %></p>
-				<% end %>
+				<%= this_secret[:content] %>
 			</td>
+			<% if current_user == @view_user %>
+				<td>		
+					<form action="/secrets/<%= this_secret[:id] %>" method='post'>
+						<input type='hidden' name='_method' value='delete'>
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+						<input type='submit' value='Delete Secret'>
+					</form>
+				</td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>

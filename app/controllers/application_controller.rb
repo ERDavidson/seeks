@@ -8,4 +8,12 @@ class ApplicationController < ActionController::Base
 	end
 	helper_method :current_user
 
+	def mine(user, secret)
+		puts "this secret is " + secret.inspect.to_s
+		puts "this user is " + user.inspect.to_s
+		puts User.find(user[:id]).secrets.inspect.to_s
+		puts User.find(user[:id]).secrets.find_by(secret[:id]).inspect
+		User.find(user[:id]).secrets.pluck(:id).include? secret[:id]
+	end
+	helper_method :mine
 end

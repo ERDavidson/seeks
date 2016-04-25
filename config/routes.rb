@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   post '/secrets/create' => 'secrets#create'
 
+  delete '/secrets/:id' => 'secrets#destroy'
+
   get '/secrets' => 'secrets#index'
 
 
