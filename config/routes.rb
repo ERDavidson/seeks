@@ -20,7 +20,11 @@ Rails.application.routes.draw do
 
   delete '/sessions' => 'sessions#logout'
 
+  post '/secrets/create' => 'secrets#create'
+
   get '/secrets' => 'secrets#index'
+
+
  
 
 

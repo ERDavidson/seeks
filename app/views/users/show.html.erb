@@ -35,8 +35,8 @@
 </table>
 <% if current_user[:id] == @view_user[:id] %>
 	<p>Tell me everything!</p>
-	<form>
-		<textarea class="new_secret" name="secret[content]"></textarea>
+	<form action='/secrets/create' method='post'>
+		<textarea class="new_secret" name="secret_content"></textarea>
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
 		<input type='submit' value='Share Secret'>
 	</form>
