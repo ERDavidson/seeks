@@ -60,6 +60,8 @@
 			</tr>
 		<% end %>
 	</table>
+	<div class='footer'>
+		<a href="/secrets">View Secrets</a> | <a href="/users/<% current_user[:id] %>">My Profile</a>
 <% else %>
 	<p>Not a member?  <a href="/users/new">Register here!</a></p>
 <% end %>

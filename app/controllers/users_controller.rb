@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
 	def show
 		@view_user = User.find(params[:id])
+		@secret_list = Secret.all.where(user:User.find(@view_user[:id]))
 	end
 
 	def edit
@@ -56,38 +57,20 @@ class UsersController < ApplicationController
 	  	end
 	end
 
-	def login
-		@user = User.find_by(email: params[:user][:email].downcase).try(:authenticate, params[:user]['password'])
-		if !@user
-			flash[:errors] = "Login failed.  Please try again"
-			redirect_to "/"
-		else
-			flash[:action_status] = "Login successful!"
-			session[:user] = @user['id']
-			redirect_to "/users/#{@user['id']}"
-		end
+	def destroy
+		destroyed_user = User.find(params[:id]).destroy
+		reset_session
+		flash[:action_status] = "Your account has been deleted."
+		redirect_to "/"
 	end
 
-  def destroy
-  	destroyed_user = User.find(params[:id]).destroy
-  	reset_session
-  	flash[:action_status] = "Your account has been deleted."
-  	redirect_to "/"
-  end
-
-  def logout
-  	reset_session
-  	flash[:action_status] = "You have been logged out."
-  	redirect_to "/"
-  end
-
-  private
-  	def register_params
+	private
+		def register_params
 	  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  	end
+		end
 
-  	def update_params
-  		params.require(:user).permit(:name, :email)
-  	end
+		def update_params
+			params.require(:user).permit(:name, :email)
+		end
 
 end

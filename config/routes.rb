@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
+
   root 'users#index'
 
-  get '/users/index' => 'users#index'
-
-  get 'users/new' => 'users#new'
+  get '/users/new' => 'users#new'
 
   post '/users/create' => 'users#create'
 
@@ -14,12 +13,14 @@ Rails.application.routes.draw do
   patch '/users/:id' => 'users#update'
 
   delete '/users/:id' => 'users#destroy'
+
+  get '/users' => 'users#index'
   
-  post '/sessions/create' => 'users#login'
+  post '/sessions/create' => 'sessions#login'
 
-  delete '/sessions' => 'users#logout'
+  delete '/sessions' => 'sessions#logout'
 
-  get '/logout' => 'users#logout'
+  get '/secrets' => 'secrets#index'
  
 
 
