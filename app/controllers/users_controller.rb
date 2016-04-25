@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
 	def show
 		@view_user = User.find(params[:id])
-		@secret_list = Secret.all.where(user:User.find(@view_user[:id]))
+		@secret_list = Secret.prepare_secrets(@view_user)
 	end
 
 	def edit

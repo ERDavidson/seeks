@@ -1,6 +1,6 @@
 class SecretsController < ApplicationController
 	def index
-		@secret_list = Secret.all
+		@trimmed_secrets = Secret.prepare_secrets()
 	end
 
 	def create
@@ -19,5 +19,7 @@ class SecretsController < ApplicationController
 		flash[:action_status] = "Secret destr... er, made secret again."
 		redirect_to "/users/#{session[:user]}"
 	end
+
+	
 
 end

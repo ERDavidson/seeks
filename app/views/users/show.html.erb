@@ -25,13 +25,15 @@
 </table>
 <table>
 	<tr>
-		<td>Secrets</td>
+		<td>Secret</td>
+		<td>Likes</td>
 	</tr>
 	<% @secret_list.each do |this_secret| %>
 		<tr>
 			<td class='secret_list'>
 				<%= this_secret[:content] %>
 			</td>
+			<td><%= this_secret[:likes] %></td>
 			<% if current_user == @view_user %>
 				<td>		
 					<form action="/secrets/<%= this_secret[:id] %>" method='post'>
